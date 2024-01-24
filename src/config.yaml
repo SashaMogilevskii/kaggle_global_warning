@@ -1,0 +1,27 @@
+n_splits: 6
+test_folds:
+  - 1
+
+seed: 1771
+epochs: 20
+aug: "self.aug = A.Compose([
+                A.Resize(self.size, self.size),
+
+                ToTensorV2(transpose_mask=True)])"
+num_workers: 0
+debug: True
+path_data_csv: "../data_6kfold.csv"
+scheduler: " get_cosine_with_hard_restarts_schedule_with_warmup(optimizer,
+                                                                       num_warmup_steps=int(all_steps // 10),
+                                                                       num_training_steps=all_steps)"
+
+
+batch_size: 24
+lr: 0.0005
+model_name: 'efficientnet-b0'
+model: "CustomModel"
+
+k_dice_loss: 1
+k_bce_loss: 0
+encoder_weights: "imagenet"
+size :  320
